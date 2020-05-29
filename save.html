@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- <meta name="viewport" content="width=drvice-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Cache" content="no-cache">
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>纱线展邀请函</title>
+  <script src="js/flex.js"></script>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/save.css">
+  <script src="js/html2canvasl.js"></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <div class="card">
+    <div class="card-con" id="savePage">
+      <div class="card-con-bg">
+        <image src="image/index-bg.jpg" class="card-list-image" mode="aspectFit|aspectFill|widthFix" lazy-load="false" />
+      </div>
+      <div class="card-logo">
+        <image class="" src="image/logo.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="car-logo-image" />
+      </div>
+      <div class="card-title">
+        大湾区国际纺织纱线博览会
+      </div>
+      <div class="save-name">
+        <p>
+          邀请函
+        </p>
+        <p>
+          INVITATION
+        </p>
+      </div>
+      <div class="save-content">
+        <div class="save-img-con">
+          <div class="save-img">
+            <image class="save-img-one" src="image/logo.png" id="saveImgOne" />
+          </div>
+        </div>
+        <div class="save-list" id="saveList">
+        </div>
+      </div>
+
+      <div class="card-last">
+        <div class="card-last-top">
+          <div class="card-left">
+              <image src="image/index-date.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="card-last-one" />
+              <image src="image/index-city.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="card-last-three" />
+              <image src="image/index-ad.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="card-last-two" />
+          </div>
+          <div class="card-right">
+            <div class="card-right-con">
+              <image class="card-right-img" src="image/card.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+              <p class="card-right-text">
+                观众预登记
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <image src="image/index-text.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="card-last-four" />
+        </div>
+      </div>
+    </div>
+    <div class="card-save-img">
+      <div class="card-save-con">
+        <div class="card-save-first">
+          提示
+        </div>
+        <div class="card-save-sec">
+          <text>
+            您可长按识别
+          </text>
+          <text>
+            并保存图片转发好友或朋友圈
+          </text>
+
+        </div>
+        <div class="card-save-btn" id="cardSaveBtn">
+          知道了
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+<script>
+  $(document).ready(function () {
+    function	judgeBigScreen() {  //，这里根据返回值 true 或false ,返回true的话 则为全面屏
+  	  let result = false;
+  		const rate = window.screen.height / window.screen.width;
+  		let limit =  window.screen.height == window.screen.availHeight ? 1.8 : 1.65; // 临界判断值
+
+     // window.screen.height为屏幕高度
+    //  window.screen.availHeight 为浏览器 可用高度
+
+  		if (rate > limit) {
+  		result = true;
+  		}
+  		return result;
+	 };
+      // $('.card-save-img').hide()
+    var baseUrl = window.localStorage.getItem('logoUrl') || ''
+    var message = window.localStorage.getItem('messageList') || ''
+    var list = message && JSON.parse(message)
+    var listData = list && [
+      {
+        value: list && list.name || '',
+        name: ''
+      },
+      {
+        value: list && list.tel || '',
+        name: ''
+      },
+      {
+        value: list && list.companyName || '',
+        name: ''
+      },
+      {
+        value: list && list.positionNumber || '',
+        name: ''
+      },
+      {
+        value: '产品简介',
+        name: list && list.descriptionText || ''
+      }
+    ] || []
+    listData.length && $.each(listData, function (i, e) {
+      console.log(i, e)
+      var html = `
+         <div>
+              ${e.value ? e.value : ''}
+              ${e.name ? '<p>' + e.name + '</p>' : ''}
+          </div>
+        `
+      $('#saveList').append(html);
+    })
+    // console.log(baseUrl, 'nihao')
+    // alert(baseUrl)
+    if (baseUrl) {
+      $("#saveImgOne").attr("src", baseUrl);
+    } else {
+      $('.save-img-con').html('')
+    }
+    var doc = window.document;
+    var width = $('#savePage').width();
+    var height = $('#savePage').height();
+    var dataURL;
+
+    var canvas = document.createElement("canvas");
+    var context = canvas.getContext("2d");
+    var scale = 2;
+
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+
+    canvas.getContext("2d").scale(scale, scale);
+
+    var opts = {
+      dpi: 350,
+      scale: scale, // 添加的scale 参数
+      canvas: canvas, //自定义 canvas
+      // logging: true, //日志开关，便于查看html2canvas的内部执行流程
+      taintTest: false,
+      useCORS: true, // 【重要】开启跨域配置
+      allowTaint: true,
+      width: width,
+      height: height
+    };
+    console.log(canvas.width, canvas.height, height, width)
+    $('#cardSaveBtn').on('click', function () {
+      $('.card-save-img').hide()
+    })
+    $('.card-save-con').on('chick', function() {
+      $('.card-save-img').hide()
+    })
+    console.log(judgeBigScreen())
+    let isAllWidth = judgeBigScreen()
+    setTimeout(() => {
+      html2canvas(document.querySelector("#savePage"), {
+        ...opts,
+        onrendered: function (canvas) {
+          dataURL = canvas.toDataURL();
+          var image = document.createElement('img')
+          image.crossorigin = "anonymous"
+          image.src = dataURL
+          let widthNotAll = (canvas.width >= width * 2) ? canvas.width / scale : canvas.width
+          // image.width = (canvas.width >= width * 2) ? canvas.width / scale : canvas.width;
+          image.width = isAllWidth ?  canvas.width / scale : widthNotAll;
+          image.height =  canvas.height/ scale;
+          // image.height = canvas.height >= height * 2 ? canvas.height / scale : canvas.height;
+          image.id = 'savePageImage'
+          let url = image
+          $('#savePage').html(url);
+        }
+      })
+    })
+  })
+</script>
+
+</html>

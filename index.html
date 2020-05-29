@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <!-- <meta name="viewport" content="width=drvice-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;"> -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Cache" content="no-cache">
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>纱线展邀请函</title>
+  <script src="js/flex.js"></script>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <div class="card">
+    <div class="card-con">
+      <div class="card-logo">
+        <image id="carLogoImage" src="image/logo.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="car-logo-image"
+        />
+      </div>
+      <div class="card-title">
+        邀请函生成
+      </div>
+      <div class="card-file">
+        <div class="card-text" id="cardText">
+          上传图片或Logo（建议正方形比例）
+        </div>
+        <input type="file" id="logoImg" placeholder="" accept="image/*" name="url" value="">
+      </div>
+      <div class="card-search">
+        <div class="card-one">
+          <div class="card-one-list">
+            姓名:
+          </div>
+          <label for="" class="card-one-input">
+            <input type="text" id="name">
+          </label>
+        </div>
+        <div class="card-one">
+          <div class="card-one-list">
+            电话:
+          </div>
+          <label for="" class="card-one-input">
+            <input type="text" id="tel">
+          </label>
+        </div>
+        <div class="card-one">
+          <div class="card-one-list">
+            单位名称:
+          </div>
+          <label for="" class="card-one-input">
+            <input type="text" id="companyName">
+          </label>
+        </div>
+        <div class="card-one">
+          <div class="card-one-list">
+            展位号:
+          </div>
+          <label for="" class="card-one-input">
+            <input type="text" id="positionNumber">
+          </label>
+        </div>
+        <div class="card-one">
+            <div class="card-one-list">
+                产品简介（限60字以内）
+            </div>
+            <label for="" class="card-one-input">
+              <textarea name="" cols="30" rows="10" maxlength="120" id="descriptionText"></textarea>
+            </label>
+        </div>
+      </div>
+      <div class="card-save" id="saveInvitation">
+         生成邀请函
+      </div>
+      <div class="card-last">
+        <div class="card-last-top">
+          <div class="card-left">
+              <image src="image/index-date.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="card-last-one" />
+              <image src="image/index-city.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="card-last-three" />
+              <image src="image/index-ad.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="card-last-two" />
+          </div>
+          <div class="card-right">
+            <div class="card-right-con">
+              <image class="card-right-img" src="image/card.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" />
+              <p class="card-right-text">
+                观众预登记
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <image src="image/index-text.png" mode="aspectFit|aspectFill|widthFix" lazy-load="false" binderror="" bindload="" class="card-last-four" />
+        </div>
+      </div>
+    </div>
+    <div class="alert-msg">请输入姓名</div>
+  </div>
+</body>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script>
+// window.location.reload()
+    $(document).ready(function(){
+      console.log('nihao')
+    $('#logoImg').val('')
+    // window.localStorage.getItem('logoUrl') &&window.localStorage.removeItem('logoUrl')
+    let btnMsg =false
+     function showMsg(msg){
+       if(btnMsg){
+         return
+       }
+       btnMsg = true
+       $('.alert-msg').text(msg)
+       $('.alert-msg').show()
+       setTimeout(function(){
+        $('.alert-msg').hide()
+        $('.alert-msg').text('')
+        btnMsg = false
+       },1000)
+     }
+     let nameSave = ''
+      $('#saveInvitation').on('click', function() {
+        if(!verification()){
+          return
+        }
+        var name = $('#name').val();
+        var tel = $('#tel').val();
+        var companyName = $('#companyName').val();
+        var positionNumber = $('#positionNumber').val();
+        var descriptionText = $('#descriptionText').val();
+        let params = {
+          name,
+          tel,
+          companyName,
+          positionNumber,
+          descriptionText
+        }
+        window.localStorage.setItem('messageList', JSON.stringify(params))
+        window.location.href='save.html'
+        $('#logoImg').val('')
+      })
+      // let dataNum =  String(new Date().getTime())
+      // document.getElementById('logoImg').setAttribute('value', dataNum)
+      $('#logoImg').on('change', function(e) {
+        let files = e.target.files[0]
+        if (!getImgSize(files)) {
+          return
+        }
+        let name = files.name
+        var rd = new FileReader();
+        rd.readAsDataURL(files)
+        rd.onload = function() {
+          window.localStorage.setItem('logoUrl', rd.result)
+        }
+        nameSave = name || ''
+        $('#cardText').html(name)
+        $('#logoImg').val('')
+        // let files = e.target.files[0]
+        // var files = new File([files], new Date().getTime() + "_pic.jpg", {
+        //     type: files.type
+        // });
+        // alert(files, 'files')
+        // if (!getImgSize(files)) {
+        //   return
+        // }
+        // let name = files.name
+        // window.location.setItem('')
+        // alert(name)
+        // var rd = new FileReader();
+        // rd.readAsDataURL(files)
+        // rd.onload = function() {
+        //   window.localStorage.setItem('logoUrl', rd.result)
+        // }
+        // nameSave = name || ''
+        // $('#cardText').html(name)
+        // $('#logoImg').val('')
+        // document.getElementById('logoImg').value = name
+        // dataNum = name
+        // console.log(dataNum)
+        // document.getElementById('logoImg').setAttribute('value', '')
+        // console.log(document.getElementById('logoImg').value, 'value')
+      })
+      $('#logoImg').on('click', function(e) {
+        e.target.value = ''
+        console.log('nihao', e.target.value)
+      })
+
+      function getImgSize(files) {
+        var sizeNum = files.size
+        if (sizeNum / 1024 / 1024 > 5) {
+          showMsg('文件太大!')
+          return false
+        }
+        return true
+      }
+
+     function verification(){
+       let tel = /^1\d{10}$/
+       let phone = $('#tel').val()
+       if(!nameSave){
+        showMsg('请输入图片！')
+        return false
+       }
+       if(!$('#name').val()){
+        showMsg('请输入姓名！')
+        return false
+       }
+       if(!phone){
+        showMsg('请输入电话！')
+        return false
+       }
+       if(phone&&!tel.test(phone)){
+        showMsg('请输入正确的电话！')
+        return false
+       }
+       if(!$('#companyName').val()){
+        showMsg('请输入单位名称！')
+        return false
+       }
+       // if(!$('#positionNumber').val()){
+       //  showMsg('请输入展位号！')
+       //  return false
+       // }
+       if(!$('#descriptionText').val()){
+        showMsg('请输入产品简介！')
+        return false
+       }
+       return true
+     }
+    })
+</script>
+</html>

@@ -1,0 +1,89 @@
+
+/* titel */
+.card{
+  height: 20.106667rem;
+  width: 10rem;
+}
+.card-logo{
+  margin-bottom: .533333rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.card-logo img{
+  display: block;
+  height: .8rem;
+  width: 4.746667rem;
+  padding-top: 1.12rem;
+}
+/* footer */
+.card-last{
+  width: 10rem;
+  height: 4.453333rem;
+  background: #4BBCF0;
+  padding: .373333rem .293333rem 0 .373333rem;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.card-last-top{
+  display: flex;
+  justify-content: space-between;
+}
+.card-last .card-last-one{
+  display: block;
+  width: 5.306667rem;
+  height: .613333rem;
+  margin-bottom: .133333rem;
+}
+.card-last .card-last-two{
+  display: block;
+  width: 3.413333rem;
+  height: .48rem;
+  margin-bottom: .08rem;
+}
+.card-last .card-last-three{
+  display: block;
+  width: 5.546667rem;
+  height: .506667rem;
+  margin-bottom: .08rem;
+}
+.card-last .card-last-four{
+  display: block;
+  width: 7.28rem;
+  height: 1.23rem;
+}
+.card-last-dis{
+  width: 7.493333rem;
+  margin-top: .133333rem;
+}
+.card-last-dis p{
+  line-height: .4rem;
+  font-size:.4rem;
+font-family:ArialMT;
+color:rgba(254,254,254,1);
+}
+
+.card-right{
+  height: 2.106667rem;
+  background: #fff;
+  width: 1.706667rem;
+}
+.card-right-con  .card-right-img{
+  height: 1.706667rem;
+  width: 1.706667rem;
+}
+.card-right-con .card-right-text{
+  font-size:.213333rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(2,2,2,1);
+  text-align: center;
+  height: .4rem;
+  line-height: .4rem;
+  display: block;
+  position: relative;
+  top: -.066667rem;
+}
