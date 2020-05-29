@@ -21,8 +21,7 @@ text-align: center;
 .card-file{
   width: 7.253333rem;
   height: .96rem;
-  background: pink;
-  background:rgba(221,218,218,1);
+  background:#ffc0cb;
 border-radius:.16rem;
 border: 0.027rem solid rgba(151,151,151,1);
 position: relative;
@@ -48,7 +47,7 @@ margin: 0 auto;
   font-size:.32rem;
 font-family:PingFangSC-Regular,PingFang SC;
 font-weight:400;
-color:rgba(0,0,0,0.85);
+color:#fff;
 }
 .card-search{
   display: flex;
