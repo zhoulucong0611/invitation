@@ -9,14 +9,13 @@
   background-size: contain;
 }
 .card-title{
-  font-size:.586667rem;
-font-family:PingFangSC-Medium,PingFang SC;
-font-weight:500;
-color:rgba(95,95,95,1);
-margin-bottom: .16rem;
-line-height: .586667rem;
-margin-bottom: .32rem;
-text-align: center;
+  font-size:.4rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(35,25,22,1);
+  margin-bottom: .346667rem;
+  line-height: .56rem;
+  text-align: center;
 }
 .card-file{
   width: 7.253333rem;
@@ -47,7 +46,7 @@ margin: 0 auto;
   font-size:.32rem;
 font-family:PingFangSC-Regular,PingFang SC;
 font-weight:400;
-color:#fff;
+color:rgba(0,0,0,0.85);
 }
 .card-search{
   display: flex;
