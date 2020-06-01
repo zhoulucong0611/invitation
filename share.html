@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Cache" content="no-cache">
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>纱线展邀请函</title>
+  <script src="js/flex.js"></script>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/save.css">
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="js/common_v5.js"></script>
+</head>
+
+<body>
+  <div class="card">
+    <div class="card-con" id="savePage">
+    </div>
+    <div class="card-save-img">
+      <div class="card-save-con">
+        <div class="card-save-first">
+          提示
+        </div>
+        <div class="card-save-sec">
+          <text>
+            您可长按识别
+          </text>
+          <text>
+            并保存图片转发好友或朋友圈
+          </text>
+
+        </div>
+        <div class="card-save-btn" id="cardSaveBtn">
+          知道了
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+<script>
+  $(document).ready(function () {
+    var hrefName =  window.location.search
+    let getParams = hrefName && hrefName.split('=')[1]
+    var getUrl = decodeURIComponent(getParams)
+    var image = document.createElement('img')
+    var width = $('#savePage').width();
+    var height = $('#savePage').height();
+    image.crossorigin = "anonymous"
+    image.src = getUrl
+    image.width = width
+    image.id = 'shareImage'
+    $('#savePage').html(image);
+    $('#cardSaveBtn').on('click', function () {
+      $('.card-save-img').hide()
+    })
+    $('.card-save-con').on('chick', function() {
+      $('.card-save-img').hide()
+    })
+    InitWechatJSSDK()
+  })
+</script>
+
+</html>

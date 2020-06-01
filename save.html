@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="css/save.css">
   <script src="js/html2canvasl.js"></script>
   <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="js/common_v5.js"></script>
 </head>
 
 <body>
@@ -92,7 +94,6 @@
   </div>
 </body>
 
-
 <script>
   $(document).ready(function () {
     function	judgeBigScreen() {  //，这里根据返回值 true 或false ,返回true的话 则为全面屏
@@ -144,8 +145,6 @@
         `
       $('#saveList').append(html);
     })
-    // console.log(baseUrl, 'nihao')
-    // alert(baseUrl)
     if (baseUrl) {
       $("#saveImgOne").attr("src", baseUrl);
     } else {
@@ -176,34 +175,53 @@
       width: width,
       height: height
     };
-    console.log(canvas.width, canvas.height, height, width)
     $('#cardSaveBtn').on('click', function () {
       $('.card-save-img').hide()
     })
     $('.card-save-con').on('chick', function() {
       $('.card-save-img').hide()
     })
-    console.log(judgeBigScreen())
     let isAllWidth = judgeBigScreen()
-    setTimeout(() => {
+    // setTimeout(() => {
       html2canvas(document.querySelector("#savePage"), {
         ...opts,
         onrendered: function (canvas) {
+          var $this = this
           dataURL = canvas.toDataURL();
           var image = document.createElement('img')
           image.crossorigin = "anonymous"
           image.src = dataURL
           let widthNotAll = (canvas.width >= width * 2) ? canvas.width / scale : canvas.width
-          // image.width = (canvas.width >= width * 2) ? canvas.width / scale : canvas.width;
           image.width = isAllWidth ?  canvas.width / scale : widthNotAll;
           image.height =  canvas.height/ scale;
-          // image.height = canvas.height >= height * 2 ? canvas.height / scale : canvas.height;
           image.id = 'savePageImage'
           let url = image
           $('#savePage').html(url);
+           // 请求接口
+          var urlAjax = 'https://cdn.indata3.com/carry-data/upload.php'
+          var formData = new FormData();
+          formData.append("base64_image", dataURL);
+          formData.append("mobilephone", list && list.tel); 
+          console.log(formData)
+          // let res = {"code":1,"msg":"upload_success","data":{"data":"https:\/\/oss.indata3.com\/yarnexpo-mini-program\/var\/invitation\/15101012832"}}
+            $.ajax({
+              type:"POST",
+              url:urlAjax,
+              contentType: false,
+              processData: false,
+              data: formData,
+              success:function(res){
+                if(res.code===1){
+                  console.log(res, res.data.data)
+                  let getDataUrl = res.data && encodeURIComponent(res.data.data)
+                  InitWechatJSSDK(getDataUrl)
+                }
+              }
+
+            });
         }
       })
-    })
+    // })
   })
 </script>
 

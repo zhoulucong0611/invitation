@@ -1,6 +1,10 @@
 .card{
   position: relative;
 }
+#shareImage{
+  /* height: 20.106667rem; */
+  width: 10rem;
+}
 .card-con{
   height: 20.106667rem;
   width: 10rem;
