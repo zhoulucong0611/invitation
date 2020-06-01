@@ -5,7 +5,7 @@
 function wxShareConfig(val) {
 var baseLink = ''
   if (val) {
-    baseLink = '/save.html?tel=' + val
+    baseLink = '/share.html?tel=' + val
   }
   return baseLink
 }
