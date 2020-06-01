@@ -55,7 +55,7 @@
     var width = $('#savePage').width();
     var height = $('#savePage').height();
     image.crossorigin = "anonymous"
-    image.src = getUrl
+    image.src = getUrl && getUrl.replace("\"", "");
     image.width = width
     image.id = 'shareImage'
     $('#savePage').html(image);

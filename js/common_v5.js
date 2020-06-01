@@ -42,6 +42,7 @@ function InitWechatJSSDK(val) {
                 ]
             });
             wx.ready(function () {
+                console.log('信息验证成功')
                 wx.onMenuShareAppMessage({
                     title:'大湾区国际纺织纱线博览会', // 分享标题
                     desc: 'Grrater Bay Area International Trade Fair for Fibres and Yarns', // 分享描述
