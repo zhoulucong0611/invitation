@@ -5,7 +5,7 @@
 function wxShareConfig(val) {
 var baseLink = ''
   if (val) {
-    baseLink = '/share.html?tel=' + val
+    baseLink = 'https://cdn.indata3.com/yarnexpo/share.html?tel=' + val
   }
   return baseLink
 }
