@@ -1,10 +1,10 @@
 
-$(window).on('load',function () {
+$(function () {
+   console.log('执行页面')
    InitWechatJSSDK();
 })
 function InitWechatJSSDK() {
     var url = window.location.href;
-    // var data = {"appId":"wx19a6518b60fbdf06","nonceStr":"pZ2iL2OSMl6jI1Pj","timestamp":1591000057,"url":"http:\/\/cdn.indata3.com\/wechat\/wxSign.php","signature":"ce34190f3798f7c2b07d9bc2c1c82fcf507123ce","rawString":"jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VG9z8TkOGp5HQj1w1CmVUMwQoDRy6V-22TLf1EfIrHhH81v2cUMOrpDb6hmeTwmqqg&noncestr=pZ2iL2OSMl6jI1Pj&timestamp=1591000057&url=http:\/\/cdn.indata3.com\/wechat\/wxSign.php"}
     $.ajax({
         type: "POST",
         url: "https://cdn.indata3.com/wechat/wxSign.php" ,
