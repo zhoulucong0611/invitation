@@ -220,7 +220,7 @@
               success:function(res){
                 if(res.code===1){
                   console.log(res, res.data.data)
-                  let getDataUrl = res.data && encodeURIComponent(res.data.data)
+                  let getDataUrl = res.data && res.data.data
                   var baseLinkUrl = wxShareConfig(getDataUrl)
                   console.log(baseLinkUrl, 'baseLinkUrl save')
                   wx && wx.ready(() => {

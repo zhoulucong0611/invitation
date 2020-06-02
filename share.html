@@ -48,9 +48,19 @@
 
 <script>
   $(document).ready(function () {
-    var hrefName =  window.location.search
-    let getParams = hrefName && hrefName.split('=')[1]
-    var getUrl = decodeURIComponent(getParams)
+    function UrlParamHash(url) {
+      var params = [],
+      h;
+      var hash = url.slice(url.indexOf("?") + 1).split('&');
+      for (var i = 0; i < hash.length; i++) {
+        h = hash[i].split("=");
+        params[h[0]] = h[1];
+      }
+      return params;
+    }
+    var hrefName =  window.location.href
+    let getParams = UrlParamHash(hrefName)
+    var getUrl = getParams.tel
     var image = document.createElement('img')
     var width = $('#savePage').width();
     var height = $('#savePage').height();
@@ -65,9 +75,8 @@
     $('.card-save-con').on('chick', function() {
       $('.card-save-img').hide()
     })
-    // InitWechatJSSDK()
-    var baseLinkUrl = window.location.href
-    console.log(baseLinkUrl, 'baseLinkUrl share')
+    var baseLinkUrl = 'https://cdn.indata3.com/yarnexpo/share.html?tel=' +getUrl
+    console.log(baseLinkUrl)
     wx && wx.ready(() => {
       wx.onMenuShareAppMessage({
           title:'大湾区国际纺织纱线博览会', // 分享标题

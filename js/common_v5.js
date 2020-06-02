@@ -1,5 +1,5 @@
 
-$(window).on('reday',function () {
+$(window).on('load',function () {
    InitWechatJSSDK();
 })
 function InitWechatJSSDK() {
