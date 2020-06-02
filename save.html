@@ -182,6 +182,13 @@
       $('.card-save-img').hide()
     })
     let isAllWidth = judgeBigScreen()
+    function wxShareConfig(val) {
+      var baseLink = ''
+        if (val) {
+          baseLink = 'https://cdn.indata3.com/yarnexpo/share.html?tel=' + val
+        }
+        return baseLink
+    }
     // setTimeout(() => {
       html2canvas(document.querySelector("#savePage"), {
         ...opts,
@@ -214,8 +221,34 @@
                 if(res.code===1){
                   console.log(res, res.data.data)
                   let getDataUrl = res.data && encodeURIComponent(res.data.data)
-                  setTimeout(() =>{
-                    InitWechatJSSDK(getDataUrl)
+                  var baseLinkUrl = wxShareConfig(getDataUrl)
+                  console.log(baseLinkUrl, 'baseLinkUrl save')
+                  wx && wx.ready(() => {
+                    wx.onMenuShareAppMessage({
+                        title:'大湾区国际纺织纱线博览会', // 分享标题
+                        desc: 'Grrater Bay Area International Trade Fair for Fibres and Yarns', // 分享描述
+                        link: baseLinkUrl, //location.href	 分享链接
+                        imgUrl:'https://cdn.indata3.com/yarnexpo/image/sharelogo.png',
+                        type: '', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function () {
+                            alert("share ok!")
+                        },
+                        cancel: function () {
+                            alert("share cancel!");
+                        }
+                    });
+                    wx.onMenuShareTimeline({
+                        title: '大湾区国际纺织纱线博览会', // 分享标题
+                        link: baseLinkUrl, // 分享链接
+                        imgUrl: 'https://cdn.indata3.com/yarnexpo/image/sharelogo.png', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
                   })
                 }
               }
